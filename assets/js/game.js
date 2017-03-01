@@ -19,20 +19,41 @@ var win = document.getElementById("win");
 var random = 0;
 
 function tacklehero() {
-		enemy.hpnow = enemy.hpnow - 5
+		enemy.hpnow = enemy.hpnow - 5 + enemy.defense
 		enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 		enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
 
 }
 
 function tackleenemy() {
-		hero.hpnow = hero.hpnow - 5
+		hero.hpnow = hero.hpnow - 5 + hero.defense
 		herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
 		herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
 }
 
-var enemy = {name: "Pikachu", lvl: 10, hpnow: 60, hptotal: 60, img: "assets/images/pikachufront.png", moves: [{name: "Tackle", effect: function() {tackleenemy()}}, "", "", ""]}
-var hero = {name: "Mew", lvl: 15, hpnow: 75, hptotal: 75, img: "assets/images/mewback.png", moves: [{name: "Tackle", effect: function() {tacklehero()}}, "", "", ""]}
+
+function tailwhiphero() {
+	enemy.defense--;
+}
+
+function tailwhipenemy() {
+	enemy.defense--;
+}
+
+function electricshockenemy() {
+	hero.hpnow = hero.hpnow - 10 + hero.defense;
+	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+}
+
+function psychichero() {
+	enemy.hpnow = enemy.hpnow - 10 + hero.defense;
+	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
+	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+}
+
+var enemy = {name: "Pikachu", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, img: "assets/images/pikachufront.png", moves: [{name: "Tackle", effect: function() {tackleenemy()}}, {name: "Tail Whip", effect: function() {tailwhipenemy}}, {name: "Electric Shock", effect: function() {electricshockenemy()}}, ""]}
+var hero = {name: "Mew", lvl: 15, hpnow: 75, hptotal: 75, defense: 3, img: "assets/images/mewback.png", moves: [{name: "Tackle", effect: function() {tacklehero()}}, {name: "Tail Whip", effect: function() {tailwhiphero()}}, {name: "Psychic", effect: function() {psychichero()}}, ""]}
 
 function randomizer() {
 	random = Math.floor(Math.random() * 4);
