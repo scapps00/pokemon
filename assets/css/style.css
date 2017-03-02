@@ -75,3 +75,7 @@
 #fight, #win {
 	display: none;
 }
+
+#herostatus, #enemystatus {
+	font-size: 25px;
+}
