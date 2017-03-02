@@ -21,6 +21,25 @@ var win = document.getElementById("win");
 var rando = 0;
 var placeholder = "";
 
+function paralyzeenemy() {
+	rando = Math.random();
+	if (rando < .25 && hero.status == "") {
+		placeholder = function() {		
+			hero.status = "paralyzed";
+			herostatus.textContent = "paralyzed";
+			opt0.textContent = hero.name + " is paralyzed";
+			opt1.textContent = "and can't move!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+		}
+		setTimeout(placeholder, 2000);
+		setTimeout(options, 4000);
+	}
+	else {
+		setTimeout(options, 2000);
+	}
+}
+
 function tacklehero() {
 		enemy.hpnow = enemy.hpnow - 5 + enemy.defense
 		enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
@@ -51,22 +70,7 @@ function electricshockenemy() {
 	hero.hpnow = hero.hpnow - 10 + hero.defense;
 	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
 	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
-	rando = Math.random();
-	if (rando < .25) {
-		placeholder = function() {		
-			hero.status = "paralyzed";
-			herostatus.textContent = "paralyzed";
-			opt0.textContent = hero.name + " is paralyzed";
-			opt1.textContent = "and can't move!";
-			opt2.textContent = "";
-			opt3.textContent = "";
-		}
-		setTimeout(placeholder, 2000);
-		setTimeout(options, 4000);
-	}
-	else {
-		setTimeout(options, 2000);
-	}
+	paralyzeenemy();
 }
 
 function psychichero() {
@@ -142,13 +146,14 @@ function domove(x) {
 			opt3.textContent = "";
 			hero.status = "";
 			herostatus.textContent = "";
-			setTimeout(domove, 2000);
+			setTimeout("domove("+x+")", 2000);
 		}
 		else {
 			opt0.textContent = hero.name + " is paralyzed";
 			opt1.textContent = "and can't move!";
 			opt2.textContent = "";
 			opt3.textContent = "";
+			setTimeout(enemymove, 2000);
 		}
 	}
 	else {

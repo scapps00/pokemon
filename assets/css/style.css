@@ -76,6 +76,6 @@
 	display: none;
 }
 
-#herostatus, #enemystatus {
+#herostatus, #herolvl, #enemystatus, #enemylvl {
 	font-size: 25px;
 }
