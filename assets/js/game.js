@@ -57,13 +57,27 @@ function tackleenemy() {
 
 
 function tailwhiphero() {
-	enemy.defense--;
-	setTimeout(options, 2000);
+	if (enemy.defense > 0) {
+		enemy.defense--;
+		opt1.textContent = enemy.name + "'s defense is lowered!";
+		setTimeout(options, 2000);
+	}
+	else {
+		opt1.textContent = "It had no effect!";
+		setTimeout(options, 2000);
+	}
 }
 
 function tailwhipenemy() {
-	enemy.defense--;
-	setTimeout(options, 2000);
+	if (hero.defense > 0) {
+		hero.defense--;
+		opt1.textContent = hero.name + "'s defense is lowered!";
+		setTimeout(options, 2000);
+	}
+	else {
+		opt1.textContent = "It had no effect!";
+		setTimeout(options, 2000);
+	}
 }
 
 function electricshockenemy() {
@@ -77,10 +91,11 @@ function psychichero() {
 	enemy.hpnow = enemy.hpnow - 10 + hero.defense;
 	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+	enemy.status = "paralyzed";
 	setTimeout(options, 2000);
 }
 
-var enemy = {name: "Pikachu", type: "electric", status: "", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, attack: 2, img: "assets/images/pikachufront.png", moves: [{name: "Tackle", effect: function() {tackleenemy()}}, {name: "Tail Whip", effect: function() {tailwhipenemy}}, {name: "Electric Shock", effect: function() {electricshockenemy()}}, ""]}
+var enemy = {name: "Pikachu", type: "electric", status: "", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, attack: 2, img: "assets/images/pikachufront.png", moves: [{name: "Tackle", effect: function() {tackleenemy()}}, {name: "Tail Whip", effect: function() {tailwhipenemy()}}, {name: "Electric Shock", effect: function() {electricshockenemy()}}, ""]}
 var hero = {name: "Mew", type: "psychic", status: "", lvl: 15, hpnow: 75, hptotal: 75, defense: 3, attack: 2, img: "assets/images/mewback.png", moves: [{name: "Tackle", effect: function() {tacklehero()}}, {name: "Tail Whip", effect: function() {tailwhiphero()}}, {name: "Psychic", effect: function() {psychichero()}}, ""]}
 
 function randomizer() {
@@ -123,14 +138,38 @@ function enemymove() {
 		opt3.onclick = function() {
 		}
 	}
+	else if (enemy.status == "paralyzed") {
+		random = Math.random();
+		if (random < .35) {
+			opt0.textContent = enemy.name + " is no longer";
+			opt1.textContent = "paralyzed!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			enemy.status = "";
+			enemystatus.textContent = "";
+			setTimeout(enemymove, 2000);
+		}
+		else {
+			opt0.textContent = enemy.name + " is paralyzed";
+			opt1.textContent = "and can't move!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			setTimeout(options, 2000);
+		}
+	}
 	else {
 		randomizer();
-		enemy.moves[2].effect();
 		opt0.textContent = enemy.name + " used " + enemy.moves[random].name + "!";
 		opt1.textContent = "";
 		opt2.textContent = "";
 		opt3.textContent = "";
-		if (hero.hpnow <= 0) {
+		enemy.moves[random].effect();
+		if (hero.hpnow < 0) {
+			hero.hpnow = 0;
+			herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+			herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+		}
+		if (hero.hpnow == 0) {
 			setTimeout(lose, 2000);
 		}
 	}
@@ -139,7 +178,7 @@ function enemymove() {
 function domove(x) {
 	if (hero.status == "paralyzed") {
 		random = Math.random();
-		if (random < .45) {
+		if (random < .35) {
 			opt0.textContent = hero.name + " is no longer";
 			opt1.textContent = "paralyzed!";
 			opt2.textContent = "";
@@ -156,13 +195,42 @@ function domove(x) {
 			setTimeout(enemymove, 2000);
 		}
 	}
+	else if (hero.status == "poisoned") {
+			opt0.textContent = hero.name + " is poisoned";
+			opt1.textContent = "and took damage!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			hero.hpnow = hero.hpnow - 2;
+			herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+			herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+			placeholder() = function () {
+				fight.play();
+				opt0.textContent = hero.name + " used " + hero.moves[x].name + "!";
+				opt1.textContent = "";
+				opt2.textContent = "";
+				opt3.textContent = "";
+				hero.moves[x].effect();
+				if (enemy.hpnow < 0) {
+					enemy.hpnow = 0;
+					enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
+					enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+				}
+				setTimeout (enemymove, 2000);
+			}
+			setTimeout (placeholder, 2000);	
+	}
 	else {
 		fight.play();
-		hero.moves[x].effect();
 		opt0.textContent = hero.name + " used " + hero.moves[x].name + "!";
 		opt1.textContent = "";
 		opt2.textContent = "";
 		opt3.textContent = "";
+		hero.moves[x].effect();
+		if (enemy.hpnow < 0) {
+			enemy.hpnow = 0;
+			enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
+			enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+		}
 		setTimeout (enemymove, 2000);
 	}
 }
@@ -215,6 +283,12 @@ var options = function() {
 		else {
 			opt3.textContent = "";
 		}
+	}
+	opt1.onclick = function() {
+	}		
+	opt2.onclick = function() {
+	}		
+	opt3.onclick = function() {
 	}
 }
 
