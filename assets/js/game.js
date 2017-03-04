@@ -87,7 +87,6 @@ function psychichero() {
 	enemy.hpnow = enemy.hpnow - 10 + hero.defense;
 	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
-	enemy.status = "poisoned";
 }
 
 var enemy = {name: "Pikachu", type: "electric", status: "", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, attack: 2, img: "assets/images/pikachufront.png", moves: [{name: "Tackle", effect: function() {tackleenemy()}}, {name: "Tail Whip", effect: function() {tailwhipenemy()}}, {name: "Electric Shock", effect: function() {electricshockenemy()}}, ""]}
