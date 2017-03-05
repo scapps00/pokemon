@@ -1,3 +1,50 @@
+var dance = document.getElementById("dance");
+dance.loop = true;
+
+var enemy = "";
+var hero = "";
+var pickrando = 0;
+
+document.getElementById("pikachupick").onclick = function() {
+	hero = "Pikachu";
+	pickrando = Math.random();
+	if (pickrando > .5) {
+		enemy = "Bulbasaur";
+	}
+	else {
+		enemy = "Mew";
+	}
+	document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio>";
+	game();
+}
+
+document.getElementById("bulbasaurpick").onclick = function() {
+	hero = "Bulbasaur";
+	pickrando = Math.random();
+	if (pickrando > .5) {
+		enemy = "Mew";
+	}
+	else {
+		enemy = "Pikachu";
+	}
+	document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio>";
+	game();
+}
+
+document.getElementById("mewpick").onclick = function() {
+	hero = "Mew";
+	pickrando = Math.random();
+	if (pickrando > .5) {
+		enemy = "Bulbasaur";
+	}
+	else {
+		enemy = "Pikachu";
+	}
+	document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio>";
+	game();
+}
+
+function game() {
 var music = document.getElementById("music");
 music.loop = true;
 
@@ -40,6 +87,25 @@ function paralyzeenemy() {
 	}
 }
 
+function paralyzehero() {
+	rando = Math.random();
+	if (rando < .25 && enemy.status == "") {
+		placeholder = function() {		
+			enemy.status = "paralyzed";
+			enemystatus.textContent = "paralyzed";
+			opt0.textContent = enemy.name + " is paralyzed";
+			opt1.textContent = "and can't move!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+		}
+		setTimeout(placeholder, 2000);
+		setTimeout(enemymove, 4000);
+	}
+	else {
+		setTimeout(enemymove, 2000);
+	}
+}
+
 function tacklehero() {
 		enemy.hpnow = enemy.hpnow - 5 + enemy.defense
 		enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
@@ -76,26 +142,122 @@ function tailwhipenemy() {
 	}
 }
 
+function electricshockhero() {
+	enemy.hpnow = enemy.hpnow - 10 + enemy.defense;
+	if (enemy.type == "water" || enemy.type == "flying") {
+		enemy.hpnow = enemy.hpnow - 3;
+	}
+	if (enemy.type == "steel") {
+		enemy.hpnow = enemy.hpnow + 6;
+	}
+	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
+	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+	paralyzehero();
+}
+
 function electricshockenemy() {
 	hero.hpnow = hero.hpnow - 10 + hero.defense;
+	if (hero.type == "water" || hero.type == "flying") {
+		hero.hpnow = hero.hpnow - 3;
+	}
+	if (hero.type == "steel") {
+		hero.hpnow = hero.hpnow + 6;
+	}
 	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
 	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
-	if (hero.status == "") {
-		paralyzeenemy();
-	}
-	else {
-		setTimeout(options, 2000);
-	}
+	paralyzeenemy();
 }
 
 function psychichero() {
-	enemy.hpnow = enemy.hpnow - 10 + hero.defense;
+	enemy.hpnow = enemy.hpnow - 10 + enemy.defense;
+	if (enemy.type == "fighting" || enemy.type == "poison") {
+		enemy.hpnow = enemy.hpnow - 3;
+	}
+	else if (enemy.type == "steel" || enemy.type == "psychic") {
+		enemy.hpnow = enemy.hpnow + 3;
+	}
+	else if (enemy.type == "dark") {
+		enemy.hpnow = enemy.hpnow + 6;
+	}
 	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
 }
 
-var enemy = {name: "Pikachu", type: "electric", status: "", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, attack: 2, img: "assets/images/pikachufront.png", moves: [{name: "Tackle", effect: function() {tackleenemy()}}, {name: "Tail Whip", effect: function() {tailwhipenemy()}}, {name: "Electric Shock", effect: function() {electricshockenemy()}}, ""]}
-var hero = {name: "Mew", type: "psychic", status: "", lvl: 15, hpnow: 75, hptotal: 75, defense: 3, attack: 2, img: "assets/images/mewback.png", moves: [{name: "Tackle", effect: function() {tacklehero()}}, {name: "Tail Whip", effect: function() {tailwhiphero()}}, {name: "Psychic", effect: function() {psychichero()}}, ""]}
+function psychicenemy() {
+	hero.hpnow = hero.hpnow - 10 + hero.defense;
+	if (hero.type == "fighting" || hero.type == "poison") {
+		hero.hpnow = hero.hpnow - 3;
+	}
+	else if (hero.type == "steel" || hero.type == "psychic") {
+		hero.hpnow = hero.hpnow + 3;
+	}
+	else if (hero.type == "dark") {
+		hero.hpnow = hero.hpnow + 6;
+	}
+	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+	setTimeout(options, 2000);
+}
+
+function vinewhiphero() {
+	enemy.hpnow = enemy.hpnow - 7 + enemy.defense;
+	if (enemy.type == "ground" || enemy.type == "rock" || enemy.type == "water") {
+		enemy.hpnow = enemy.hpnow - 3;
+	}
+	if (enemy.type == ("flying" || "poison" || "bug" || "steel" || "fire" || "grass" || "dragon")) {
+		enemy.hpnow = enemy.hpnow + 3;
+	}
+	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
+	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+} 
+function vinewhipenemy() {
+	hero.hpnow = hero.hpnow - 7 + hero.defense;
+	if (hero.type == "ground" || hero.type == "rock" || hero.type == "water") {
+		hero.hpnow = hero.hpnow - 3;
+	}
+	if (hero.type == ("flying" || "poison" || "bug" || "steel" || "fire" || "grass" || "dragon")) {
+		hero.hpnow = hero.hpnow + 3;
+	}
+	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+	setTimeout(options, 2000);
+} 
+
+var Pikachu = {name: "Pikachu", type: "electric", status: "", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, attack: 2, frontimg: "assets/images/pikachufront.png", backimg: "assets/images/pikachuback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Electric Shock", effecthero: function() {electricshockhero()}, effectenemy: function() {electricshockenemy()}}, ""]}
+
+var Mew = {name: "Mew", type: "psychic", status: "", lvl: 15, hpnow: 75, hptotal: 75, defense: 3, attack: 2, frontimg: "assets/images/mewfront.png", backimg: "assets/images/mewback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Psychic", effecthero: function() {psychichero()}, effectenemy: function() {psychicenemy()}}, ""]}
+
+var Bulbasaur = {name: "Bulbasaur", type: "plant", status: "", lvl: 13, hpnow: 80, hptotal: 80, defense: 4, attack: 2, frontimg: "assets/images/bulbasaurfront.png", backimg: "assets/images/bulbasaurback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Vine Whip", effecthero: function() {vinewhiphero()}, effectenemy: function() {vinewhipenemy()}}, ""]}
+
+if (hero == "Pikachu") {
+	hero = Pikachu;
+	if (enemy == "Mew") {
+		enemy = Mew;
+	}
+	else {
+		enemy = Bulbasaur;
+	}
+}
+
+if (hero == "Mew") {
+	hero = Mew;
+	if (enemy == "Pikachu") {
+		enemy = Pikachu;
+	}
+	else {
+		enemy = Bulbasaur;
+	}
+}
+
+if (hero == "Bulbasaur") {
+	hero = Bulbasaur;
+	if (enemy == "Pikachu") {
+		enemy = Pikachu;
+	}
+	else {
+		enemy = Mew;
+	}
+}
 
 function randomizer() {
 	random = Math.floor(Math.random() * 4);
@@ -218,7 +380,7 @@ function enemymove() {
 				opt1.textContent = "";
 				opt2.textContent = "";
 				opt3.textContent = "";
-				enemy.moves[random].effect();
+				enemy.moves[random].effectenemy();
 				if (hero.hpnow < 0) {
 					hero.hpnow = 0;
 					herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
@@ -255,7 +417,7 @@ function enemymove() {
 		opt1.textContent = "";
 		opt2.textContent = "";
 		opt3.textContent = "";
-		enemy.moves[random].effect();
+		enemy.moves[random].effectenemy();
 		if (hero.hpnow < 0) {
 			hero.hpnow = 0;
 			herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
@@ -302,7 +464,7 @@ function domove(x) {
 				opt1.textContent = "";
 				opt2.textContent = "";
 				opt3.textContent = "";
-				hero.moves[x].effect();
+				hero.moves[x].effecthero();
 				if (enemy.hpnow < 0) {
 					enemy.hpnow = 0;
 					enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
@@ -345,7 +507,7 @@ function domove(x) {
 				opt1.textContent = "";
 				opt2.textContent = "";
 				opt3.textContent = "";
-				hero.moves[x].effect();
+				hero.moves[x].effecthero();
 				if (enemy.hpnow < 0) {
 					enemy.hpnow = 0;
 					enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
@@ -380,7 +542,7 @@ function domove(x) {
 		opt1.textContent = "";
 		opt2.textContent = "";
 		opt3.textContent = "";
-		hero.moves[x].effect();
+		hero.moves[x].effecthero();
 		if (enemy.hpnow < 0) {
 			enemy.hpnow = 0;
 			enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
@@ -393,13 +555,13 @@ function domove(x) {
 enemyname.textContent = enemy.name;
 enemylvl.textContent = "Level: " + enemy.lvl;
 enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
-enemyimg.src = enemy.img;
+enemyimg.src = enemy.frontimg;
 enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
 
 heroname.textContent = hero.name;
 herolvl.textContent = "Level: " + hero.lvl;
 herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
-heroimg.src = hero.img;
+heroimg.src = hero.backimg;
 herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
 
 var options = function() {
@@ -448,3 +610,4 @@ var options = function() {
 }
 
 options();
+}

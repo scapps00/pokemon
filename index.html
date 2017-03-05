@@ -7,45 +7,19 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
-<body>
+<body id="body">
 <div id="gamearea">
-	<div id="enemystats">
-		<p id="enemyname"></p>
-		<p><span id="enemylvl"></span>&nbsp;&nbsp;&nbsp;<span id="enemystatus"></span></p>
-		<div id="enemyhpbar"><p id="enemyhpbarfull"></p></div>
-		<p id="enemyhp"></p>
-	</div>
-	<div id="enemyimgdiv">
-		<img id="enemyimg" src="">
-	</div>
-	<div id="heroimgdiv">
-		<img id="heroimg" src="">
-	</div>
-	<div id="herostats">
-		<p id="heroname"></p>
-		<p><span id="herolvl"></span>&nbsp;&nbsp;&nbsp;<span id="herostatus"></span></p>
-		<p id="herostatus"></p>
-		<div id="herohpbar"><p id="herohpbarfull"></p></div>
-		<p id="herohp"></p>
-	</div>
-	<div id="options">
-		<ul>
-			<li id="opt0">FIGHT</li>
-			<li id="opt1">ITEM</li>
-			<li id="opt2">QUIT</li>
-			<li id="opt3"></li>
-		</ul>
-	</div>
+	<h1>Pick a fighter!</h1>
+	<br>
+	<img src="assets/images/bulbasaurfront.png" alt="bulbasaur" class="pickimg" id="bulbasaurpick">
+	<br>
+	<img src="assets/images/pikachufront.png" alt="pikachu" class="pickimg" id="pikachupick">
+	<br>
+	<img src="assets/images/mewfront.png" alt="mew" class="pickimg" id="mewpick">
 </div>
-<audio controls autoplay id="music">
-	<source src="assets/music/music.mp3" type="audio/mpeg">
+<audio controls autoplay id="dance">
+	<source src="assets/music/dance.mp3" type="audio/mpeg">
 </audio>
-<audio id="fight">
-	<source src="assets/sounds/fight.wav" type="audio/wav">
-</audio>
-<audio id="win">
-	<source src="assets/sounds/megawin.mp3" type="audio/wav">
-</audio>
-<script type="text/javascript" src="assets/js/game.js"></script>
 </body>
+<script type="text/javascript" src="assets/js/game.js"></script>
 </html>
