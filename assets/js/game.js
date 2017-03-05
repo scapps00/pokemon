@@ -80,7 +80,12 @@ function electricshockenemy() {
 	hero.hpnow = hero.hpnow - 10 + hero.defense;
 	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
 	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
-	paralyzeenemy();
+	if (hero.status == "") {
+		paralyzeenemy();
+	}
+	else {
+		setTimeout(options, 2000);
+	}
 }
 
 function psychichero() {
@@ -96,6 +101,17 @@ function randomizer() {
 	random = Math.floor(Math.random() * 4);
 	if (enemy.moves[random] == "") {
 		randomizer();
+	}
+}
+
+function clearactions() {
+	opt0.onclick = function() {
+	}
+	opt1.onclick = function() {
+	}		
+	opt2.onclick = function() {
+	}		
+	opt3.onclick = function() {
 	}
 }
 
@@ -123,14 +139,6 @@ function enemymove() {
 		opt3.textContent = "";
 		win.play();
 		music.pause();
-		opt0.onclick = function() {
-		}
-		opt1.onclick = function() {
-		}		
-		opt2.onclick = function() {
-		}		
-		opt3.onclick = function() {
-		}
 	}
 	else if (enemy.status == "paralyzed") {
 		random = Math.random();
@@ -177,6 +185,70 @@ function enemymove() {
 			}
 			setTimeout (placeholder, 2000);	
 	}
+	else if (enemy.status == "sleeping") {
+		random = Math.random();
+		if (random < .35) {
+			opt0.textContent = enemy.name + " is no longer";
+			opt1.textContent = "asleep!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			enemy.status = "";
+			enemystatus.textContent = "";
+			setTimeout(enemymove, 2000);
+		}
+		else {
+			opt0.textContent = enemy.name + " is asleep!";
+			opt1.textContent = "";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			setTimeout(options, 2000);
+		}
+	}
+	else if (enemy.status == "burned") {
+			opt0.textContent = enemy.name + " is burned";
+			opt1.textContent = "and took damage!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			enemy.hpnow = enemy.hpnow - 2;
+			enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
+			enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+			placeholder = function () {
+				randomizer();
+				opt0.textContent = enemy.name + " used " + enemy.moves[random].name + "!";
+				opt1.textContent = "";
+				opt2.textContent = "";
+				opt3.textContent = "";
+				enemy.moves[random].effect();
+				if (hero.hpnow < 0) {
+					hero.hpnow = 0;
+					herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+					herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+				}
+				if (hero.hpnow == 0) {
+					setTimeout(lose, 2000);
+				}
+			}
+			setTimeout (placeholder, 2000);
+	}
+	else if (enemy.status == "frozen") {
+		random = Math.random();
+		if (random < .20) {
+			opt0.textContent = enemy.name + " is no longer";
+			opt1.textContent = "frozen!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			enemy.status = "";
+			enemystatus.textContent = "";
+			setTimeout(enemymove, 2000);
+		}
+		else {
+			opt0.textContent = enemy.name + " is frozen";
+			opt1.textContent = "and can't move!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			setTimeout(options, 2000);
+		}
+	}
 	else {
 		randomizer();
 		opt0.textContent = enemy.name + " used " + enemy.moves[random].name + "!";
@@ -196,6 +268,7 @@ function enemymove() {
 }
 
 function domove(x) {
+	clearactions();
 	if (hero.status == "paralyzed") {
 		random = Math.random();
 		if (random < .35) {
@@ -238,6 +311,68 @@ function domove(x) {
 				setTimeout (enemymove, 2000);
 			}
 			setTimeout (placeholder, 2000);	
+	}
+	else if (hero.status == "sleeping") {
+		random = Math.random();
+		if (random < .35) {
+			opt0.textContent = hero.name + " is no longer";
+			opt1.textContent = "asleep!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			hero.status = "";
+			herostatus.textContent = "";
+			setTimeout("domove("+x+")", 2000);
+		}
+		else {
+			opt0.textContent = hero.name + " is asleep!";
+			opt1.textContent = "";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			setTimeout(enemymove, 2000);
+		}
+	}
+	else if (hero.status =="burned") {
+			opt0.textContent = hero.name + " is burned";
+			opt1.textContent = "and took damage!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			hero.hpnow = hero.hpnow - 2;
+			herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+			herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+			placeholder = function () {
+				fight.play();
+				opt0.textContent = hero.name + " used " + hero.moves[x].name + "!";
+				opt1.textContent = "";
+				opt2.textContent = "";
+				opt3.textContent = "";
+				hero.moves[x].effect();
+				if (enemy.hpnow < 0) {
+					enemy.hpnow = 0;
+					enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
+					enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+				}
+				setTimeout (enemymove, 2000);
+			}
+			setTimeout (placeholder, 2000);
+	}
+	else if (hero.status == "frozen") {
+		random = Math.random();
+		if (random < .20) {
+			opt0.textContent = hero.name + " is no longer";
+			opt1.textContent = "frozen!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			hero.status = "";
+			herostatus.textContent = "";
+			setTimeout("domove("+x+")", 2000);
+		}
+		else {
+			opt0.textContent = hero.name + " is frozen";
+			opt1.textContent = "and can't move!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+			setTimeout(enemymove, 2000);
+		}
 	}
 	else {
 		fight.play();
