@@ -1,52 +1,67 @@
-var dance = document.getElementById("dance");
-dance.loop = true;
+var opening = document.getElementById("opening");
+opening.loop = true;
+opening.volume = .5;
 
 var enemy = "";
 var hero = "";
 var pickrando = 0;
+var placeholder = "";
 
 document.getElementById("pikachupick").onclick = function() {
-	hero = "Pikachu";
-	pickrando = Math.random();
-	if (pickrando > .5) {
-		enemy = "Bulbasaur";
+	document.getElementById("pikachusound").play();
+	placeholder = function() {
+		hero = "Pikachu";
+		pickrando = Math.random();
+		if (pickrando > .5) {
+			enemy = "Bulbasaur";
+		}
+		else {
+			enemy = "Mew";
+		}
+		document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio><audio class=\"pokemonsounds\" id=\"pikachusound\"><source src=\"assets/sounds/pikachusound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"bulbasaursound\"><source src=\"assets/sounds/bulbasaursound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"mewsound\"><source src=\"assets/sounds/mewsound.mp3\" type=\"audio/mpeg\"></audio>";
+		game();
 	}
-	else {
-		enemy = "Mew";
-	}
-	document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio>";
-	game();
+	setTimeout(placeholder, 2000);
 }
 
 document.getElementById("bulbasaurpick").onclick = function() {
-	hero = "Bulbasaur";
-	pickrando = Math.random();
-	if (pickrando > .5) {
-		enemy = "Mew";
+	document.getElementById("bulbasaursound").play();
+	placeholder = function() {
+		hero = "Bulbasaur";
+		pickrando = Math.random();
+		if (pickrando > .5) {
+			enemy = "Mew";
+		}
+		else {
+			enemy = "Pikachu";
+		}
+		document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio><audio class=\"pokemonsounds\" id=\"pikachusound\"><source src=\"assets/sounds/pikachusound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"bulbasaursound\"><source src=\"assets/sounds/bulbasaursound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"mewsound\"><source src=\"assets/sounds/mewsound.mp3\" type=\"audio/mpeg\"></audio>";
+		game();
 	}
-	else {
-		enemy = "Pikachu";
-	}
-	document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio>";
-	game();
+	setTimeout(placeholder, 2000);
 }
 
 document.getElementById("mewpick").onclick = function() {
-	hero = "Mew";
-	pickrando = Math.random();
-	if (pickrando > .5) {
-		enemy = "Bulbasaur";
+	document.getElementById("mewsound").play();
+	placeholder = function () {
+		hero = "Mew";
+		pickrando = Math.random();
+		if (pickrando > .5) {
+			enemy = "Bulbasaur";
+		}
+		else {
+			enemy = "Pikachu";
+		}
+		document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio><audio class=\"pokemonsounds\" id=\"pikachusound\"><source src=\"assets/sounds/pikachusound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"bulbasaursound\"><source src=\"assets/sounds/bulbasaursound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"mewsound\"><source src=\"assets/sounds/mewsound.mp3\" type=\"audio/mpeg\"></audio>";
+		game();
 	}
-	else {
-		enemy = "Pikachu";
-	}
-	document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio>";
-	game();
+	setTimeout(placeholder, 2000);
 }
 
 function game() {
 var music = document.getElementById("music");
 music.loop = true;
+music.volume = .3;
 
 var enemyname = document.getElementById("enemyname");
 var enemylvl = document.getElementById("enemylvl");
@@ -66,26 +81,9 @@ var move1 = "";
 var fight = document.getElementById("fight");
 var win = document.getElementById("win");
 var rando = 0;
-var placeholder = "";
-
-function paralyzeenemy() {
-	rando = Math.random();
-	if (rando < .25 && hero.status == "") {
-		placeholder = function() {		
-			hero.status = "paralyzed";
-			herostatus.textContent = "paralyzed";
-			opt0.textContent = hero.name + " is paralyzed";
-			opt1.textContent = "and can't move!";
-			opt2.textContent = "";
-			opt3.textContent = "";
-		}
-		setTimeout(placeholder, 2000);
-		setTimeout(options, 4000);
-	}
-	else {
-		setTimeout(options, 2000);
-	}
-}
+var pikachusound = document.getElementById("pikachusound");
+var mewsound = document.getElementById("mewsound");
+var bulbasaursound = document.getElementById("bulbasaursound");
 
 function paralyzehero() {
 	rando = Math.random();
@@ -106,10 +104,30 @@ function paralyzehero() {
 	}
 }
 
+function paralyzeenemy() {
+	rando = Math.random();
+	if (rando < .25 && hero.status == "") {
+		placeholder = function() {		
+			hero.status = "paralyzed";
+			herostatus.textContent = "paralyzed";
+			opt0.textContent = hero.name + " is paralyzed";
+			opt1.textContent = "and can't move!";
+			opt2.textContent = "";
+			opt3.textContent = "";
+		}
+		setTimeout(placeholder, 2000);
+		setTimeout(options, 4000);
+	}
+	else {
+		setTimeout(options, 2000);
+	}
+}
+
 function tacklehero() {
 		enemy.hpnow = enemy.hpnow - 5 + enemy.defense
 		enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 		enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+		setTimeout(enemymove, 2000);
 }
 
 function tackleenemy() {
@@ -128,6 +146,7 @@ function tailwhiphero() {
 	else {
 		opt1.textContent = "It had no effect!";
 	}
+	setTimeout(enemymove, 2000);
 }
 
 function tailwhipenemy() {
@@ -146,9 +165,11 @@ function electricshockhero() {
 	enemy.hpnow = enemy.hpnow - 10 + enemy.defense;
 	if (enemy.type == "water" || enemy.type == "flying") {
 		enemy.hpnow = enemy.hpnow - 3;
+		opt1.textContent = "It's super effective!";
 	}
 	if (enemy.type == "steel") {
 		enemy.hpnow = enemy.hpnow + 6;
+		opt1.textContent = "It's barely effective.";
 	}
 	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
@@ -159,9 +180,11 @@ function electricshockenemy() {
 	hero.hpnow = hero.hpnow - 10 + hero.defense;
 	if (hero.type == "water" || hero.type == "flying") {
 		hero.hpnow = hero.hpnow - 3;
+		opt1.textContent = "It's super effective!";
 	}
 	if (hero.type == "steel") {
 		hero.hpnow = hero.hpnow + 6;
+		opt1.textContent = "It's barely effective.";
 	}
 	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
 	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
@@ -172,27 +195,34 @@ function psychichero() {
 	enemy.hpnow = enemy.hpnow - 10 + enemy.defense;
 	if (enemy.type == "fighting" || enemy.type == "poison") {
 		enemy.hpnow = enemy.hpnow - 3;
+		opt1.textContent = "It's super effective!";
 	}
 	else if (enemy.type == "steel" || enemy.type == "psychic") {
 		enemy.hpnow = enemy.hpnow + 3;
+		opt1.textContent = "It's not very effective.";
 	}
 	else if (enemy.type == "dark") {
 		enemy.hpnow = enemy.hpnow + 6;
+		opt1.textContent = "It's barely effective.";
 	}
 	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+	setTimeout(enemymove, 2000);
 }
 
 function psychicenemy() {
 	hero.hpnow = hero.hpnow - 10 + hero.defense;
 	if (hero.type == "fighting" || hero.type == "poison") {
 		hero.hpnow = hero.hpnow - 3;
+		opt1.textContent = "It's super effective!";
 	}
 	else if (hero.type == "steel" || hero.type == "psychic") {
 		hero.hpnow = hero.hpnow + 3;
+		opt1.textContent = "It's not very effective.";
 	}
 	else if (hero.type == "dark") {
 		hero.hpnow = hero.hpnow + 6;
+		opt1.textContent = "It's barely effective.";
 	}
 	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
 	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
@@ -203,31 +233,37 @@ function vinewhiphero() {
 	enemy.hpnow = enemy.hpnow - 7 + enemy.defense;
 	if (enemy.type == "ground" || enemy.type == "rock" || enemy.type == "water") {
 		enemy.hpnow = enemy.hpnow - 3;
+		opt1.textContent = "It's super effective!";
 	}
 	if (enemy.type == ("flying" || "poison" || "bug" || "steel" || "fire" || "grass" || "dragon")) {
 		enemy.hpnow = enemy.hpnow + 3;
+		opt1.textContent = "It's not very effective.";
 	}
 	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+	setTimeout(enemymove, 2000);
 } 
+
 function vinewhipenemy() {
 	hero.hpnow = hero.hpnow - 7 + hero.defense;
 	if (hero.type == "ground" || hero.type == "rock" || hero.type == "water") {
 		hero.hpnow = hero.hpnow - 3;
+		opt1.textContent = "It's super effective!";
 	}
 	if (hero.type == ("flying" || "poison" || "bug" || "steel" || "fire" || "grass" || "dragon")) {
 		hero.hpnow = hero.hpnow + 3;
+		opt1.textContent = "It's not very effective.";
 	}
 	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
 	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
 	setTimeout(options, 2000);
 } 
 
-var Pikachu = {name: "Pikachu", type: "electric", status: "", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, attack: 2, frontimg: "assets/images/pikachufront.png", backimg: "assets/images/pikachuback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Electric Shock", effecthero: function() {electricshockhero()}, effectenemy: function() {electricshockenemy()}}, ""]}
+var Pikachu = {name: "Pikachu", type: "electric", status: "", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, attack: 2, sound: pikachusound, frontimg: "assets/images/pikachufront.png", backimg: "assets/images/pikachuback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Electric Shock", effecthero: function() {electricshockhero()}, effectenemy: function() {electricshockenemy()}}, ""]}
 
-var Mew = {name: "Mew", type: "psychic", status: "", lvl: 15, hpnow: 75, hptotal: 75, defense: 3, attack: 2, frontimg: "assets/images/mewfront.png", backimg: "assets/images/mewback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Psychic", effecthero: function() {psychichero()}, effectenemy: function() {psychicenemy()}}, ""]}
+var Mew = {name: "Mew", type: "psychic", status: "", lvl: 15, hpnow: 75, hptotal: 75, defense: 3, attack: 2, sound: mewsound, frontimg: "assets/images/mewfront.png", backimg: "assets/images/mewback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Psychic", effecthero: function() {psychichero()}, effectenemy: function() {psychicenemy()}}, ""]}
 
-var Bulbasaur = {name: "Bulbasaur", type: "plant", status: "", lvl: 13, hpnow: 80, hptotal: 80, defense: 4, attack: 2, frontimg: "assets/images/bulbasaurfront.png", backimg: "assets/images/bulbasaurback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Vine Whip", effecthero: function() {vinewhiphero()}, effectenemy: function() {vinewhipenemy()}}, ""]}
+var Bulbasaur = {name: "Bulbasaur", type: "grass", status: "", lvl: 13, hpnow: 80, hptotal: 80, defense: 4, attack: 2, sound: bulbasaursound, frontimg: "assets/images/bulbasaurfront.png", backimg: "assets/images/bulbasaurback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Vine Whip", effecthero: function() {vinewhiphero()}, effectenemy: function() {vinewhipenemy()}}, ""]}
 
 if (hero == "Pikachu") {
 	hero = Pikachu;
@@ -413,6 +449,8 @@ function enemymove() {
 	}
 	else {
 		randomizer();
+		enemy.sound.play();
+		setTimeout(enemy.sound.pause, 2000);
 		opt0.textContent = enemy.name + " used " + enemy.moves[random].name + "!";
 		opt1.textContent = "";
 		opt2.textContent = "";
@@ -537,7 +575,8 @@ function domove(x) {
 		}
 	}
 	else {
-		fight.play();
+		hero.sound.play();
+		setTimeout(hero.sound.pause, 2000);
 		opt0.textContent = hero.name + " used " + hero.moves[x].name + "!";
 		opt1.textContent = "";
 		opt2.textContent = "";
@@ -548,7 +587,6 @@ function domove(x) {
 			enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 			enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
 		}
-		setTimeout (enemymove, 2000);
 	}
 }
 
