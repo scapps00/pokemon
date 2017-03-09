@@ -59,6 +59,17 @@ document.getElementById("mewpick").onclick = function() {
 }
 
 function game() {
+function clearactions() {
+	opt0.onclick = function() {
+	}
+	opt1.onclick = function() {
+	}		
+	opt2.onclick = function() {
+	}		
+	opt3.onclick = function() {
+	}
+}
+
 var music = document.getElementById("music");
 music.loop = true;
 music.volume = .3;
@@ -123,15 +134,53 @@ function paralyzeenemy() {
 	}
 }
 
+function burnhero() {
+	rando = Math.random();
+	if (rando < .4 && enemy.status == "") {
+		placeholder = function() {		
+			enemy.status = "burned";
+			enemystatus.textContent = "burned";
+			opt0.textContent = enemy.name + " is burned!";
+			opt1.textContent = "";
+			opt2.textContent = "";
+			opt3.textContent = "";
+		}
+		setTimeout(placeholder, 2000);
+		setTimeout(options, 4000);
+	}
+	else {
+		setTimeout(options, 2000);
+	}
+}
+
+function burnenemy() {
+	rando = Math.random();
+	if (rando < .4 && enemy.status == "") {
+		placeholder = function() {		
+			hero.status = "burned";
+			herostatus.textContent = "burned";
+			opt0.textContent = hero.name + " is burned!";
+			opt1.textContent = "";
+			opt2.textContent = "";
+			opt3.textContent = "";
+		}
+		setTimeout(placeholder, 2000);
+		setTimeout(options, 4000);
+	}
+	else {
+		setTimeout(options, 2000);
+	}
+}
+
 function tacklehero() {
-		enemy.hpnow = enemy.hpnow - 5 + enemy.defense
+		enemy.hpnow = enemy.hpnow - 5 + enemy.defense - hero.attack;
 		enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 		enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
 		setTimeout(enemymove, 2000);
 }
 
 function tackleenemy() {
-		hero.hpnow = hero.hpnow - 5 + hero.defense
+		hero.hpnow = hero.hpnow - 5 + hero.defense - enemy.attack;
 		herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
 		herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
 		setTimeout(options, 2000);
@@ -162,7 +211,7 @@ function tailwhipenemy() {
 }
 
 function electricshockhero() {
-	enemy.hpnow = enemy.hpnow - 10 + enemy.defense;
+	enemy.hpnow = enemy.hpnow - 10 + enemy.defense - hero.attack;
 	if (enemy.type == "water" || enemy.type == "flying") {
 		enemy.hpnow = enemy.hpnow - 3;
 		opt1.textContent = "It's super effective!";
@@ -177,7 +226,7 @@ function electricshockhero() {
 }
 
 function electricshockenemy() {
-	hero.hpnow = hero.hpnow - 10 + hero.defense;
+	hero.hpnow = hero.hpnow - 10 + hero.defense - enemy.attack;
 	if (hero.type == "water" || hero.type == "flying") {
 		hero.hpnow = hero.hpnow - 3;
 		opt1.textContent = "It's super effective!";
@@ -192,7 +241,7 @@ function electricshockenemy() {
 }
 
 function psychichero() {
-	enemy.hpnow = enemy.hpnow - 10 + enemy.defense;
+	enemy.hpnow = enemy.hpnow - 10 + enemy.defense - hero.attack;
 	if (enemy.type == "fighting" || enemy.type == "poison") {
 		enemy.hpnow = enemy.hpnow - 3;
 		opt1.textContent = "It's super effective!";
@@ -211,7 +260,7 @@ function psychichero() {
 }
 
 function psychicenemy() {
-	hero.hpnow = hero.hpnow - 10 + hero.defense;
+	hero.hpnow = hero.hpnow - 10 + hero.defense - enemy.attack;
 	if (hero.type == "fighting" || hero.type == "poison") {
 		hero.hpnow = hero.hpnow - 3;
 		opt1.textContent = "It's super effective!";
@@ -229,8 +278,46 @@ function psychicenemy() {
 	setTimeout(options, 2000);
 }
 
+function hypnosishero() {
+	rando = Math.random();
+	placeholder = function() {
+		opt0.textContent = enemy.name + " fell asleep!";
+		enemystatus.textContent = "sleeping";
+	}
+	if (rando < .5 && enemy.status == "") {
+		enemy.status = "sleeping";
+		setTimeout(placeholder, 2000);
+	}
+	else {
+		placeholder = function() {
+			opt0.textContent = "But it didn't work!";
+		}
+		setTimeout(placeholder, 2000);
+	}
+	setTimeout(enemymove, 4000);
+}
+
+function hypnosisenemy() {
+	rando = Math.random();
+	placeholder = function() {
+		opt0.textContent = hero.name + " fell asleep!";
+		herostatus.textContent = "sleeping";
+	}
+	if (rando < .5 && hero.status == "") {
+		hero.status = "sleeping";
+		setTimeout(placeholder, 2000);
+	}
+	else {
+		placeholder = function() {
+			opt0.textContent = "But it didn't work!";
+		}
+		setTimeout(placeholder, 2000);
+	}
+	setTimeout(options, 4000);
+}
+
 function vinewhiphero() {
-	enemy.hpnow = enemy.hpnow - 7 + enemy.defense;
+	enemy.hpnow = enemy.hpnow - 7 + enemy.defense - hero.attack;
 	if (enemy.type == "ground" || enemy.type == "rock" || enemy.type == "water") {
 		enemy.hpnow = enemy.hpnow - 3;
 		opt1.textContent = "It's super effective!";
@@ -245,7 +332,7 @@ function vinewhiphero() {
 } 
 
 function vinewhipenemy() {
-	hero.hpnow = hero.hpnow - 7 + hero.defense;
+	hero.hpnow = hero.hpnow - 7 + hero.defense - enemy.attack;
 	if (hero.type == "ground" || hero.type == "rock" || hero.type == "water") {
 		hero.hpnow = hero.hpnow - 3;
 		opt1.textContent = "It's super effective!";
@@ -259,11 +346,86 @@ function vinewhipenemy() {
 	setTimeout(options, 2000);
 } 
 
+function emberhero() {
+	enemy.hpnow = enemy.hpnow - 10 + enemy.defense - hero.attack;
+	if (enemy.type == ("bug" || "steel" || "grass" || "ice")) {
+		enemy.hpnow = enemy.hpnow - 3;
+		opt1.textContent = "It's super effective!";
+	}
+	if (enemy.type == ("rock" || "fire" || "water" || "dragon")) {
+		enemy.hpnow = enemy.hpnow -3;
+		opt1.textContent = "It's not very effective.";
+	}
+	burnhero();
+	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
+	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
+	setTimeout(options, 2000);
+}
+
+function emberenemy() {
+	hero.hpnow = hero.hpnow - 10 + hero.defense - enemy.attack;
+	if (hero.type == ("bug" || "steel" || "grass" || "ice")) {
+		hero.hpnow = hero.hpnow - 3;
+		opt1.textContent = "It's super effective!";
+	}
+	if (hero.type == ("rock" || "fire" || "water" || "dragon")) {
+		hero.hpnow = hero.hpnow -3;
+		opt1.textContent = "It's not very effective.";
+	}
+	burnenemy();
+	herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+	herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+	setTimeout(options, 2000);
+}
+
+function potioneffect() {
+	opt0.textContent = "You used a potion!";
+	hero.hpnow = hero.hpnow + 20;
+	if (hero.hpnow > hero.hptotal) {
+		opt1.textContent = hero.name + " recovered " + (hero.hptotal - hero.hpnow + 20) + "HP!";
+		hero.hpnow = hero.hptotal;
+		herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+		herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+	}
+	else if (hero.hpnow <= hero.hptotal) {
+		herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
+		herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
+		opt1.textContent = hero.name + " recovered 20HP!";
+	}
+	opt2.textContent = "";
+	opt3.textContent = "";
+	clearactions();
+	setTimeout(enemymove, 2000);
+}
+
+function antidoteeffect() {
+	opt0.textContent = "You used an antidote!"
+	if (hero.status == "poisoned"){
+		hero.status = "";
+		opt1.textContent = hero.name + " is no longer poisoned!";
+	}
+	else {
+		opt1.textContent = "It had no effect!";
+	}
+	opt2.textContent = "";
+	opt3.textContent = "";
+	clearactions();
+	setTimeout(enemymove, 2000);
+}
+
 var Pikachu = {name: "Pikachu", type: "electric", status: "", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, attack: 2, sound: pikachusound, frontimg: "assets/images/pikachufront.png", backimg: "assets/images/pikachuback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Electric Shock", effecthero: function() {electricshockhero()}, effectenemy: function() {electricshockenemy()}}, ""]}
 
-var Mew = {name: "Mew", type: "psychic", status: "", lvl: 15, hpnow: 75, hptotal: 75, defense: 3, attack: 2, sound: mewsound, frontimg: "assets/images/mewfront.png", backimg: "assets/images/mewback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Psychic", effecthero: function() {psychichero()}, effectenemy: function() {psychicenemy()}}, ""]}
+var Mew = {name: "Mew", type: "psychic", status: "", lvl: 15, hpnow: 75, hptotal: 75, defense: 3, attack: 2, sound: mewsound, frontimg: "assets/images/mewfront.png", backimg: "assets/images/mewback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Psychic", effecthero: function() {psychichero()}, effectenemy: function() {psychicenemy()}}, {name: "Hypnosis", effecthero: function() {hypnosishero()}, effectenemy: function() {hypnosisenemy()}}]}
 
 var Bulbasaur = {name: "Bulbasaur", type: "grass", status: "", lvl: 13, hpnow: 80, hptotal: 80, defense: 4, attack: 2, sound: bulbasaursound, frontimg: "assets/images/bulbasaurfront.png", backimg: "assets/images/bulbasaurback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Vine Whip", effecthero: function() {vinewhiphero()}, effectenemy: function() {vinewhipenemy()}}, ""]}
+
+var Growlithe = {name: "Growlithe", type: "fire", status: "", lvl: 17, hpnow: 90, hptotal: 90, defense: 3, attack: 3, sound: growlithesound, frontimg: "assets/images/growlithefront.png", backimg: "assets/images/growlitheback.png" moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Ember", effecthero: function() {emberhero()}, effectenemy: function() {emeberenemy()}}, ""}
+
+var potion = {name: "Potion", effect: function() {potioneffect()}};
+
+var antidote = {name: "Antidote", effect: function() {antidoteeffect()}};
+
+var items = [{item: potion, num: 2}, {item: antidote, num: 1}];
 
 if (hero == "Pikachu") {
 	hero = Pikachu;
@@ -299,17 +461,6 @@ function randomizer() {
 	random = Math.floor(Math.random() * 4);
 	if (enemy.moves[random] == "") {
 		randomizer();
-	}
-}
-
-function clearactions() {
-	opt0.onclick = function() {
-	}
-	opt1.onclick = function() {
-	}		
-	opt2.onclick = function() {
-	}		
-	opt3.onclick = function() {
 	}
 }
 
@@ -640,6 +791,22 @@ var options = function() {
 		}
 	}
 	opt1.onclick = function() {
+		opt0.textContent = items[0].item.name + " " + items[0].num;
+		if (items[0].num > 0) {
+			opt0.onclick = function() {
+				items[0].num--;
+				items[0].item.effect();
+			}
+		}
+		opt1.textContent = items[1].item.name + " " + items[1].num;
+		if (items[0].num > 0) {
+			opt1.onclick = function() {
+				items[1].num--;
+				items[1].item.effect();
+			}
+		}
+		opt2.textContent = "";
+		opt3.textContent = "";
 	}		
 	opt2.onclick = function() {
 	}		
