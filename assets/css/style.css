@@ -88,10 +88,13 @@ h1 {
 
 .pickimg {
 	width: 150px;
-    display: block;
-    margin: auto;
 }
 
 .pokemonsounds {
 	display: none;
+}
+
+#pickimgcontainer {
+	display: block;
+	margin: auto;
 }

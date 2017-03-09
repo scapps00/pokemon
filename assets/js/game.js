@@ -7,18 +7,25 @@ var hero = "";
 var pickrando = 0;
 var placeholder = "";
 
+function changescreens() {
+	document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio><audio class=\"pokemonsounds\" id=\"pikachusound\"><source src=\"assets/sounds/pikachusound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"bulbasaursound\"><source src=\"assets/sounds/bulbasaursound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"mewsound\"><source src=\"assets/sounds/mewsound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"growlithesound\"><source src=\"assets/sounds/growlithesound.mp3\" type=\"audio/mpeg\"></audio>";
+}
+
 document.getElementById("pikachupick").onclick = function() {
 	document.getElementById("pikachusound").play();
 	placeholder = function() {
 		hero = "Pikachu";
 		pickrando = Math.random();
-		if (pickrando > .5) {
+		if (pickrando > .66) {
 			enemy = "Bulbasaur";
+		}
+		else if (pickrando > .33) {
+			enemy = "Growlithe";
 		}
 		else {
 			enemy = "Mew";
 		}
-		document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio><audio class=\"pokemonsounds\" id=\"pikachusound\"><source src=\"assets/sounds/pikachusound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"bulbasaursound\"><source src=\"assets/sounds/bulbasaursound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"mewsound\"><source src=\"assets/sounds/mewsound.mp3\" type=\"audio/mpeg\"></audio>";
+		changescreens();
 		game();
 	}
 	setTimeout(placeholder, 2000);
@@ -29,13 +36,16 @@ document.getElementById("bulbasaurpick").onclick = function() {
 	placeholder = function() {
 		hero = "Bulbasaur";
 		pickrando = Math.random();
-		if (pickrando > .5) {
+		if (pickrando > .66) {
 			enemy = "Mew";
+		}
+		else if (pickrando > .33) {
+			enemy = "Growlithe";
 		}
 		else {
 			enemy = "Pikachu";
 		}
-		document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio><audio class=\"pokemonsounds\" id=\"pikachusound\"><source src=\"assets/sounds/pikachusound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"bulbasaursound\"><source src=\"assets/sounds/bulbasaursound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"mewsound\"><source src=\"assets/sounds/mewsound.mp3\" type=\"audio/mpeg\"></audio>";
+		changescreens();
 		game();
 	}
 	setTimeout(placeholder, 2000);
@@ -46,17 +56,41 @@ document.getElementById("mewpick").onclick = function() {
 	placeholder = function () {
 		hero = "Mew";
 		pickrando = Math.random();
-		if (pickrando > .5) {
+		if (pickrando > .66) {
 			enemy = "Bulbasaur";
+		}
+		else if (pickrando > .33) {
+			enemy = "Growlithe";
 		}
 		else {
 			enemy = "Pikachu";
 		}
-		document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio><audio class=\"pokemonsounds\" id=\"pikachusound\"><source src=\"assets/sounds/pikachusound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"bulbasaursound\"><source src=\"assets/sounds/bulbasaursound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"mewsound\"><source src=\"assets/sounds/mewsound.mp3\" type=\"audio/mpeg\"></audio>";
+		changescreens();
 		game();
 	}
 	setTimeout(placeholder, 2000);
 }
+
+document.getElementById("growlithepick").onclick = function() {
+	document.getElementById("growlithesound").play();
+	placeholder = function() {
+		hero = "Growlithe";
+		pickrando = Math.random();
+		if (pickrando > .66) {
+			enemy = "Bulbasaur";
+		}
+		else if (pickrando > .33) {
+			enemy = "Pikachu";
+		}
+		else {
+			enemy = "Mew";
+		}
+		changescreens();
+		game();
+	}
+	setTimeout(placeholder, 2000);
+}
+
 
 function game() {
 function clearactions() {
@@ -95,6 +129,7 @@ var rando = 0;
 var pikachusound = document.getElementById("pikachusound");
 var mewsound = document.getElementById("mewsound");
 var bulbasaursound = document.getElementById("bulbasaursound");
+var growlithesound = document.getElementById("growlithesound");
 
 function paralyzehero() {
 	rando = Math.random();
@@ -359,7 +394,7 @@ function emberhero() {
 	burnhero();
 	enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 	enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
-	setTimeout(options, 2000);
+	setTimeout(enemymove, 2000);
 }
 
 function emberenemy() {
@@ -419,7 +454,7 @@ var Mew = {name: "Mew", type: "psychic", status: "", lvl: 15, hpnow: 75, hptotal
 
 var Bulbasaur = {name: "Bulbasaur", type: "grass", status: "", lvl: 13, hpnow: 80, hptotal: 80, defense: 4, attack: 2, sound: bulbasaursound, frontimg: "assets/images/bulbasaurfront.png", backimg: "assets/images/bulbasaurback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Vine Whip", effecthero: function() {vinewhiphero()}, effectenemy: function() {vinewhipenemy()}}, ""]}
 
-var Growlithe = {name: "Growlithe", type: "fire", status: "", lvl: 17, hpnow: 90, hptotal: 90, defense: 3, attack: 3, sound: growlithesound, frontimg: "assets/images/growlithefront.png", backimg: "assets/images/growlitheback.png" moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Ember", effecthero: function() {emberhero()}, effectenemy: function() {emeberenemy()}}, ""}
+var Growlithe = {name: "Growlithe", type: "fire", status: "", lvl: 17, hpnow: 90, hptotal: 90, defense: 3, attack: 3, sound: growlithesound, frontimg: "assets/images/growlithefront.png", backimg: "assets/images/growlitheback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Ember", effecthero: function() {emberhero()}, effectenemy: function() {emberenemy()}}, ""]}
 
 var potion = {name: "Potion", effect: function() {potioneffect()}};
 
@@ -432,6 +467,9 @@ if (hero == "Pikachu") {
 	if (enemy == "Mew") {
 		enemy = Mew;
 	}
+	else if (enemy == "Growlithe") {
+		enemy = Growlithe;
+	}
 	else {
 		enemy = Bulbasaur;
 	}
@@ -442,6 +480,9 @@ if (hero == "Mew") {
 	if (enemy == "Pikachu") {
 		enemy = Pikachu;
 	}
+	else if (enemy == "Growlithe") {
+		enemy = Growlithe;
+	}
 	else {
 		enemy = Bulbasaur;
 	}
@@ -451,6 +492,22 @@ if (hero == "Bulbasaur") {
 	hero = Bulbasaur;
 	if (enemy == "Pikachu") {
 		enemy = Pikachu;
+	}
+	else if (enemy == "Growlithe") {
+		enemy = Growlithe;
+	}
+	else {
+		enemy = Mew;
+	}
+}
+
+if (hero == "Growlithe") {
+	hero = Growlithe;
+	if (enemy == "Pikachu") {
+		enemy = Pikachu;
+	}
+	else if (enemy == "Bulbasaur") {
+		enemy = Bulbasaur;
 	}
 	else {
 		enemy = Mew;
@@ -601,7 +658,6 @@ function enemymove() {
 	else {
 		randomizer();
 		enemy.sound.play();
-		setTimeout(enemy.sound.pause, 2000);
 		opt0.textContent = enemy.name + " used " + enemy.moves[random].name + "!";
 		opt1.textContent = "";
 		opt2.textContent = "";
@@ -727,7 +783,6 @@ function domove(x) {
 	}
 	else {
 		hero.sound.play();
-		setTimeout(hero.sound.pause, 2000);
 		opt0.textContent = hero.name + " used " + hero.moves[x].name + "!";
 		opt1.textContent = "";
 		opt2.textContent = "";
