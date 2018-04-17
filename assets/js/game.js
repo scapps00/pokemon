@@ -1,16 +1,20 @@
+//set up music
 var opening = document.getElementById("opening");
 opening.loop = true;
 opening.volume = .5;
 
+//set every to baseline
 var enemy = "";
 var hero = "";
 var pickrando = 0;
 var placeholder = "";
 
+//change screen from pick fighter to battle arena - this can definitely be done in a better way but this is where my skills were at when I made this
 function changescreens() {
 	document.getElementById("body").innerHTML = "<div id=\"gamearea\"><div id=\"enemystats\"><p id=\"enemyname\"></p><p><span id=\"enemylvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"enemystatus\"></span></p><div id=\"enemyhpbar\"><p id=\"enemyhpbarfull\"></p></div><p id=\"enemyhp\"></p></div><div id=\"enemyimgdiv\"><img id=\"enemyimg\" src=\"\"></div><div id=\"heroimgdiv\"><img id=\"heroimg\" src=\"\"></div><div id=\"herostats\"><p id=\"heroname\"></p><p><span id=\"herolvl\"></span>&nbsp;&nbsp;&nbsp;<span id=\"herostatus\"></span></p><p id=\"herostatus\"></p><div id=\"herohpbar\"><p id=\"herohpbarfull\"></p></div><p id=\"herohp\"></p></div><div id=\"options\"><ul><li id=\"opt0\">FIGHT</li><li id=\"opt1\">ITEM</li><li id=\"opt2\">QUIT</li><li id=\"opt3\"></li></ul></div></div><audio controls autoplay id=\"music\"><source src=\"assets/music/music.mp3\" type=\"audio/mpeg\"></audio><audio id=\"fight\"><source src=\"assets/sounds/fight.wav\" type=\"audio/wav\"></audio><audio id=\"win\"><source src=\"assets/sounds/megawin.mp3\" type=\"audio/wav\"></audio><audio class=\"pokemonsounds\" id=\"pikachusound\"><source src=\"assets/sounds/pikachusound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"bulbasaursound\"><source src=\"assets/sounds/bulbasaursound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"mewsound\"><source src=\"assets/sounds/mewsound.mp3\" type=\"audio/mpeg\"></audio><audio class=\"pokemonsounds\" id=\"growlithesound\"><source src=\"assets/sounds/growlithesound.mp3\" type=\"audio/mpeg\"></audio>";
 }
 
+//pick Pikachu
 document.getElementById("pikachupick").onclick = function() {
 	document.getElementById("pikachusound").play();
 	placeholder = function() {
@@ -31,6 +35,7 @@ document.getElementById("pikachupick").onclick = function() {
 	setTimeout(placeholder, 2000);
 }
 
+//pick Bulbasaur
 document.getElementById("bulbasaurpick").onclick = function() {
 	document.getElementById("bulbasaursound").play();
 	placeholder = function() {
@@ -51,6 +56,7 @@ document.getElementById("bulbasaurpick").onclick = function() {
 	setTimeout(placeholder, 2000);
 }
 
+//pick Mew
 document.getElementById("mewpick").onclick = function() {
 	document.getElementById("mewsound").play();
 	placeholder = function () {
@@ -71,6 +77,7 @@ document.getElementById("mewpick").onclick = function() {
 	setTimeout(placeholder, 2000);
 }
 
+//pick Growlithe
 document.getElementById("growlithepick").onclick = function() {
 	document.getElementById("growlithesound").play();
 	placeholder = function() {
@@ -104,10 +111,12 @@ function clearactions() {
 	}
 }
 
+//set up music
 var music = document.getElementById("music");
 music.loop = true;
 music.volume = .3;
 
+//set variables
 var enemyname = document.getElementById("enemyname");
 var enemylvl = document.getElementById("enemylvl");
 var enemystatus = document.getElementById("enemystatus");
@@ -131,6 +140,7 @@ var mewsound = document.getElementById("mewsound");
 var bulbasaursound = document.getElementById("bulbasaursound");
 var growlithesound = document.getElementById("growlithesound");
 
+//hero gets paralyzed
 function paralyzehero() {
 	rando = Math.random();
 	if (rando < .25 && enemy.status == "") {
@@ -150,6 +160,7 @@ function paralyzehero() {
 	}
 }
 
+//enemy gets paralyzed
 function paralyzeenemy() {
 	rando = Math.random();
 	if (rando < .25 && hero.status == "") {
@@ -169,6 +180,7 @@ function paralyzeenemy() {
 	}
 }
 
+//hero gets burned
 function burnhero() {
 	rando = Math.random();
 	if (rando < .4 && enemy.status == "") {
@@ -188,6 +200,7 @@ function burnhero() {
 	}
 }
 
+//enemy gets burned
 function burnenemy() {
 	rando = Math.random();
 	if (rando < .4 && enemy.status == "") {
@@ -207,6 +220,7 @@ function burnenemy() {
 	}
 }
 
+//hero tackles
 function tacklehero() {
 		enemy.hpnow = enemy.hpnow - 5 + enemy.defense - hero.attack;
 		enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
@@ -214,6 +228,7 @@ function tacklehero() {
 		setTimeout(enemymove, 2000);
 }
 
+//enemy tackles
 function tackleenemy() {
 		hero.hpnow = hero.hpnow - 5 + hero.defense - enemy.attack;
 		herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
@@ -222,6 +237,7 @@ function tackleenemy() {
 }
 
 
+//hero uses tail whip
 function tailwhiphero() {
 	if (enemy.defense > 0) {
 		enemy.defense--;
@@ -233,6 +249,7 @@ function tailwhiphero() {
 	setTimeout(enemymove, 2000);
 }
 
+//enemy uses tail whip
 function tailwhipenemy() {
 	if (hero.defense > 0) {
 		hero.defense--;
@@ -245,6 +262,7 @@ function tailwhipenemy() {
 	}
 }
 
+//hero uses electric shock
 function electricshockhero() {
 	enemy.hpnow = enemy.hpnow - 10 + enemy.defense - hero.attack;
 	if (enemy.type == "water" || enemy.type == "flying") {
@@ -260,6 +278,7 @@ function electricshockhero() {
 	paralyzehero();
 }
 
+//enemy uses electric shock
 function electricshockenemy() {
 	hero.hpnow = hero.hpnow - 10 + hero.defense - enemy.attack;
 	if (hero.type == "water" || hero.type == "flying") {
@@ -275,6 +294,8 @@ function electricshockenemy() {
 	paralyzeenemy();
 }
 
+
+//hero uses psychic
 function psychichero() {
 	enemy.hpnow = enemy.hpnow - 10 + enemy.defense - hero.attack;
 	if (enemy.type == "fighting" || enemy.type == "poison") {
@@ -294,6 +315,7 @@ function psychichero() {
 	setTimeout(enemymove, 2000);
 }
 
+//enemy uses psychic
 function psychicenemy() {
 	hero.hpnow = hero.hpnow - 10 + hero.defense - enemy.attack;
 	if (hero.type == "fighting" || hero.type == "poison") {
@@ -313,6 +335,7 @@ function psychicenemy() {
 	setTimeout(options, 2000);
 }
 
+//hero uses hypnosis
 function hypnosishero() {
 	rando = Math.random();
 	placeholder = function() {
@@ -332,6 +355,7 @@ function hypnosishero() {
 	setTimeout(enemymove, 4000);
 }
 
+//enemy uses hypnosis
 function hypnosisenemy() {
 	rando = Math.random();
 	placeholder = function() {
@@ -351,6 +375,7 @@ function hypnosisenemy() {
 	setTimeout(options, 4000);
 }
 
+//hero uses vine whip
 function vinewhiphero() {
 	enemy.hpnow = enemy.hpnow - 7 + enemy.defense - hero.attack;
 	if (enemy.type == "ground" || enemy.type == "rock" || enemy.type == "water") {
@@ -366,6 +391,7 @@ function vinewhiphero() {
 	setTimeout(enemymove, 2000);
 } 
 
+//enemy uses vine whip
 function vinewhipenemy() {
 	hero.hpnow = hero.hpnow - 7 + hero.defense - enemy.attack;
 	if (hero.type == "ground" || hero.type == "rock" || hero.type == "water") {
@@ -381,6 +407,7 @@ function vinewhipenemy() {
 	setTimeout(options, 2000);
 } 
 
+//hero uses ember
 function emberhero() {
 	enemy.hpnow = enemy.hpnow - 10 + enemy.defense - hero.attack;
 	if (enemy.type == ("bug" || "steel" || "grass" || "ice")) {
@@ -397,6 +424,7 @@ function emberhero() {
 	setTimeout(enemymove, 2000);
 }
 
+//enemy uses ember
 function emberenemy() {
 	hero.hpnow = hero.hpnow - 10 + hero.defense - enemy.attack;
 	if (hero.type == ("bug" || "steel" || "grass" || "ice")) {
@@ -413,6 +441,7 @@ function emberenemy() {
 	setTimeout(options, 2000);
 }
 
+//use potion
 function potioneffect() {
 	opt0.textContent = "You used a potion!";
 	hero.hpnow = hero.hpnow + 20;
@@ -433,6 +462,7 @@ function potioneffect() {
 	setTimeout(enemymove, 2000);
 }
 
+//use antidote
 function antidoteeffect() {
 	opt0.textContent = "You used an antidote!"
 	if (hero.status == "poisoned"){
@@ -448,6 +478,7 @@ function antidoteeffect() {
 	setTimeout(enemymove, 2000);
 }
 
+//objects for each Pokémon
 var Pikachu = {name: "Pikachu", type: "electric", status: "", lvl: 10, hpnow: 60, hptotal: 60, defense: 3, attack: 2, sound: pikachusound, frontimg: "assets/images/pikachufront.png", backimg: "assets/images/pikachuback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Electric Shock", effecthero: function() {electricshockhero()}, effectenemy: function() {electricshockenemy()}}, ""]}
 
 var Mew = {name: "Mew", type: "psychic", status: "", lvl: 15, hpnow: 75, hptotal: 75, defense: 3, attack: 2, sound: mewsound, frontimg: "assets/images/mewfront.png", backimg: "assets/images/mewback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Psychic", effecthero: function() {psychichero()}, effectenemy: function() {psychicenemy()}}, {name: "Hypnosis", effecthero: function() {hypnosishero()}, effectenemy: function() {hypnosisenemy()}}]}
@@ -456,12 +487,15 @@ var Bulbasaur = {name: "Bulbasaur", type: "grass", status: "", lvl: 13, hpnow: 8
 
 var Growlithe = {name: "Growlithe", type: "fire", status: "", lvl: 17, hpnow: 90, hptotal: 90, defense: 3, attack: 3, sound: growlithesound, frontimg: "assets/images/growlithefront.png", backimg: "assets/images/growlitheback.png", moves: [{name: "Tackle", effecthero: function() {tacklehero()}, effectenemy: function() {tackleenemy()}}, {name: "Tail Whip", effecthero: function() {tailwhiphero()}, effectenemy: function() {tailwhipenemy()}}, {name: "Ember", effecthero: function() {emberhero()}, effectenemy: function() {emberenemy()}}, ""]}
 
+//objects for items
 var potion = {name: "Potion", effect: function() {potioneffect()}};
 
 var antidote = {name: "Antidote", effect: function() {antidoteeffect()}};
 
+//baseline items
 var items = [{item: potion, num: 2}, {item: antidote, num: 1}];
 
+//assign objects to variables depending on what was chosen
 if (hero == "Pikachu") {
 	hero = Pikachu;
 	if (enemy == "Mew") {
@@ -514,6 +548,7 @@ if (hero == "Growlithe") {
 	}
 }
 
+//randomizes what move the enemy uses
 function randomizer() {
 	random = Math.floor(Math.random() * 4);
 	if (enemy.moves[random] == "") {
@@ -521,6 +556,7 @@ function randomizer() {
 	}
 }
 
+//what happens when you lose
 function lose() {
 	opt0.textContent = "YOU LOSE!";
 	opt1.textContent = "";
@@ -537,6 +573,7 @@ function lose() {
 	}
 }
 
+//the enemy picks a move
 function enemymove() {
 	if (enemy.hpnow <= 0) {
 		opt0.textContent = "YOU WIN!";
@@ -674,6 +711,7 @@ function enemymove() {
 	}
 }
 
+//hero does a move
 function domove(x) {
 	clearactions();
 	if (hero.status == "paralyzed") {
@@ -796,18 +834,21 @@ function domove(x) {
 	}
 }
 
+//set content in DOM for enemy
 enemyname.textContent = enemy.name;
 enemylvl.textContent = "Level: " + enemy.lvl;
 enemyhp.textContent = "HP " + enemy.hpnow + "/" + enemy.hptotal;
 enemyimg.src = enemy.frontimg;
 enemyhpbarfull.style.width = enemy.hpnow / enemy.hptotal * 100 + "%";
 
+//set content in DOM for hero
 heroname.textContent = hero.name;
 herolvl.textContent = "Level: " + hero.lvl;
 herohp.textContent = "HP " + hero.hpnow + "/" + hero.hptotal;
 heroimg.src = hero.backimg;
 herohpbarfull.style.width = hero.hpnow / hero.hptotal * 100 + "%";
 
+//set options to choose from
 var options = function() {
 	opt0.textContent = "FIGHT";
 	opt1.textContent = "ITEMS";
