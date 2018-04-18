@@ -31,4 +31,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Thanks for meyerweb.com for the reset code in reset.css
 * Thanks to [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) for the README template
+* All images and sounds copyright [Nintendo](https://www.nintendo.com) and used under noncommerical Fair Use
 
